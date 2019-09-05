@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-09-05T11:40:23+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Machine Learning</title><subtitle>Document my learning notes.</subtitle><author><name>Hoang Pham</name></author><entry><title type="html">Knowledge Distilation for Deep Neural Network</title><link href="http://localhost:4000/knowledge-distillation-for-deep-neural-network.html" rel="alternate" type="text/html" title="Knowledge Distilation for Deep Neural Network" /><published>2019-09-04T00:00:00+07:00</published><updated>2019-09-04T00:00:00+07:00</updated><id>http://localhost:4000/knowledge-distillation-for-deep-neural-network</id><content type="html" xml:base="http://localhost:4000/knowledge-distillation-for-deep-neural-network.html">&lt;blockquote&gt;
+  &lt;p&gt;Deep Neural Networks (DNN) have recently achieved great success in many natural language processing as well as computer vision tasks. However, they are becoming increasingly deeper, complex, computationally expensive and memory intensive. Some representatives of this trend are the deep language representation models, which includes BERT, ELMo, and GPT. This hinders their deployment in devices with low resources or in applications with strict latency requirements. Therefor, a natural thought is to perform model compression and acceleration in deep networks without significantly decreasing the model performance.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;!--more--&gt;
+
+&lt;ul class=&quot;table-of-content&quot; id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#model-compression-and-acceleration&quot; id=&quot;markdown-toc-model-compression-and-acceleration&quot;&gt;Model Compression and Acceleration&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#what-is-model-compression-and-acceleration&quot; id=&quot;markdown-toc-what-is-model-compression-and-acceleration&quot;&gt;What is Model Compression and Acceleration?&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#compacting-and-accelerating-nns-model-techniques&quot; id=&quot;markdown-toc-compacting-and-accelerating-nns-model-techniques&quot;&gt;Compacting and Accelerating NNs model techniques&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#knowledge-distillation&quot; id=&quot;markdown-toc-knowledge-distillation&quot;&gt;Knowledge Distillation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#summarization&quot; id=&quot;markdown-toc-summarization&quot;&gt;Summarization&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#reference&quot; id=&quot;markdown-toc-reference&quot;&gt;Reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;model-compression-and-acceleration&quot;&gt;Model Compression and Acceleration&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;In this part, I will introduce you model compression/acceleration and its four schemes: parameter pruning and sharing, low-rank factorization, transferred / compact convolutional filters, and knowledge distillation.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;what-is-model-compression-and-acceleration&quot;&gt;What is Model Compression and Acceleration?&lt;/h3&gt;
+
+&lt;h3 id=&quot;compacting-and-accelerating-nns-model-techniques&quot;&gt;Compacting and Accelerating NNs model techniques&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;assets/images/knowledge_distillation/summarize these four types of methods.png&quot; alt=&quot;Summarize 4 types of methods&quot; /&gt;
+In Table I, we briefly summarize these four types of methods [1]. Generally, the parameter pruning &amp;amp; sharing, low-rank factorization and knowledge distillation approaches can be used in DNN models with fully connected layers and convolutional layers, achieving comparable performances. While methods using transferred/compact filters are designed for models with convolutional layers only. In addition, regarding the training protocols, models based on parameter pruning/sharing low-rank factorization can be extracted from pre-trained ones or trained from scratch. While the transferred/compact filter and knowledge distillation models can only support train from scratch.&lt;/p&gt;
+&lt;h2 id=&quot;knowledge-distillation&quot;&gt;Knowledge Distillation&lt;/h2&gt;
+&lt;p&gt;In this research, we will focus on Knowledge Distillation method which can compress deep and wide networks into shallower ones, where the compressed model mimicked the function learned by the complex model. The main idea of KD based approaches is to shift knowledge from a large teacher model into a small one by learning the class distributions output via softmax.&lt;/p&gt;
+
+&lt;p&gt;In [2], knowledge distillation is described as a compression framework which eased the training of deep networks by following a student-teacher paradigm, in which the student was penalized according to a softened version of the teacher’s output. The student was trained to predict the output and the classification labels. Despite its simplicity, it demonstrates promising results in various image classification tasks. It is validated on MNIST dataset and experimental results show that these methods match or outperform the teacher’s performance, while requiring notably fewer parameters and multiplications. Moreover, this research also investigate the effects of ensembling Deep Neural Network (DNN) acoustic models that are used in Automatic Speech Recognition (ASR). It shows that the distillation strategy that they propose in this paper achieves the desired effect of distilling an ensemble of models into a single model that works significantly better than a model of the same size that is learned directly from the same training data.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/knowledge_distillation/frame_classification_acc_and_WER.png&quot; alt=&quot;Frame classification acc and WER&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The work in [3] propose to distill knowledge from BERT, a state-of- the-art language representation model, into a single-layer BiLSTM and achieve comparable results with ELMo, while using roughly 100 times fewer parameters and 15 times less inference time across multiple datasets in paraphrasing, natural language inference, and sentiment classification.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/knowledge_distillation/BiLSTM_test_result.png&quot; alt=&quot;BiLSTM test result&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;With this approach, a shallow BiLSTM based model achieves results comparable to Embeddings from Language Models (ELMo; Peters et al., 2018), but uses around 100 times fewer parameters and performs inference 15 times faster. 
+The methods of knowledge distillation provide many benefits such as directly accelerating model without special hardware or implementations. It is still worthy developing KD-based approaches and exploring how to improve their performances.&lt;/p&gt;
+
+&lt;h2 id=&quot;summarization&quot;&gt;Summarization&lt;/h2&gt;
+
+&lt;p&gt;I believe that if we know how different parts of a DNN behave, we can design student networks more cleverly and let them learn the teacher’s most important internal representations. Through that it help to transform our complex model to a simple model which could be run on CPU or deployed at the edge devices. Beside, in the scope of work of our company, I strongly believe that Knowledge Distillation can help to speed up our models as well as save the training costs. For example, some ML models of our company are using BERT in training and inference, if we can re-implement the work of [3] to create a small version of BERT, it will help a lot in reducing their storage and computational cost.&lt;/p&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;p&gt;[1] &lt;a href=&quot;https://arxiv.org/abs/1710.09282&quot;&gt;Yu Cheng, Duo Wang, Pan Zhou, Member, IEEE, and Tao Zhang, Senior Member, IEEE, “A Survey of Model Compression and Acceleration for Deep Neural Networks”.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2] &lt;a href=&quot;https://arxiv.org/abs/1503.02531&quot;&gt;G. E. Hinton, O. Vinyals, and J. Dean, “Distilling the knowledge in a neural network” CoRR, vol. Abs/1503.02531, 2015.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[3] &lt;a href=&quot;https://arxiv.org/abs/1903.12136&quot;&gt;Raphael Tang, Yao Lu, Linqing Liu, Lili Mou, Olga Vechtomova, Jimmy Lin, “Distilling Task-Specific Knowledge from BERT into Simple Neural Networks”.&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;em&gt;If you notice mistakes and errors in this post, don’t hesitate to contact me at [hoang dot a3 dot lqd at gmail dot com] and I would be super happy to correct them right away!&lt;/em&gt;&lt;/p&gt;</content><author><name>Hoang Pham</name></author><category term="foundation" /><category term="tutorial" /><summary type="html">Deep Neural Networks (DNN) have recently achieved great success in many natural language processing as well as computer vision tasks. However, they are becoming increasingly deeper, complex, computationally expensive and memory intensive. Some representatives of this trend are the deep language representation models, which includes BERT, ELMo, and GPT. This hinders their deployment in devices with low resources or in applications with strict latency requirements. Therefor, a natural thought is to perform model compression and acceleration in deep networks without significantly decreasing the model performance.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/knowledge-distillation-with-keras.png" /></entry><entry><title type="html">An Overview of Machine Learning</title><link href="http://localhost:4000/an-overview-of-machine-learning.html" rel="alternate" type="text/html" title="An Overview of Machine Learning" /><published>2019-08-13T00:00:00+07:00</published><updated>2019-08-13T00:00:00+07:00</updated><id>http://localhost:4000/an-overview-of-machine-learning</id><content type="html" xml:base="http://localhost:4000/an-overview-of-machine-learning.html">&lt;blockquote&gt;
+  &lt;p&gt;In recent years, Artificial Intelligence (AI) or more specifically Machine Learning is so pervasive that you probably use it dozens of times a day without knowing it. The self-driving cars of Google and Tesla or Siri - a virtual assistant of Apple are just a few of many AI / Machine Learning applications. In this post, I will show you an overview of machine learning as well as introduce the major types of machine learning algorithms, explain the purpose of each of them, and see what the benefits are.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;!--more--&gt;
+
+&lt;ul class=&quot;table-of-content&quot; id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#what-is-machine-learning&quot; id=&quot;markdown-toc-what-is-machine-learning&quot;&gt;What is machine learning?&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#machine-learning-definition&quot; id=&quot;markdown-toc-machine-learning-definition&quot;&gt;Machine learning definition&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#types-of-machine-learning-algorithms&quot; id=&quot;markdown-toc-types-of-machine-learning-algorithms&quot;&gt;Types of Machine Learning Algorithms&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#supervised-learning&quot; id=&quot;markdown-toc-supervised-learning&quot;&gt;Supervised Learning&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#unsupervised-learning&quot; id=&quot;markdown-toc-unsupervised-learning&quot;&gt;Unsupervised Learning&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#semi-supervised-learning&quot; id=&quot;markdown-toc-semi-supervised-learning&quot;&gt;Semi-supervised Learning&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#reinforcement-learning&quot; id=&quot;markdown-toc-reinforcement-learning&quot;&gt;Reinforcement Learning&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#summarization&quot; id=&quot;markdown-toc-summarization&quot;&gt;Summarization&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#reference&quot; id=&quot;markdown-toc-reference&quot;&gt;Reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;what-is-machine-learning&quot;&gt;What is machine learning?&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;In this part, I will try to define what is machine learning and give you a sense of when you want to use machine learning.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;machine-learning-definition&quot;&gt;Machine learning definition&lt;/h3&gt;
+&lt;p&gt;Machine learning is actively being used today, perhaps in many more places than you’d expect. You can see an example about Machine Learning applications in &lt;a href=&quot;https://www.manning.com/books/machine-learning-in-action&quot;&gt;Machine Learning in Action&lt;/a&gt; as below:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;One day, you realize it’s your friend’s birthday and want to send her a card via snail mail.
+You search for funny cards, and the search engine shows you the 10 most relevant links.
+You click the second link; the search engine learns from this.
+Next, you check some email, and without your noticing it, the spam filter catches unsolicited ads for pharmaceuticals and places them in the Spam folder.
+Next, you head to the store to buy the birthday card.
+When you’re shopping for the card, you pick up some diapers for your friend’s child.
+When you get to the checkout and purchase the items, the human operating the cash register hands you a coupon for $1 off a six-pack of beer.
+The cash register’s software generated this coupon for you because people who buy diapers also tend to buy beer.
+You send the birthday card to your friend, and a machine at the post office recognizes your handwriting to direct the mail to the proper delivery truck.
+Next, you go to the loan agent and ask them if you are eligible for loan;
+they don’t answer but plug some financial information about you into the computer and a decision is made.
+Finally, you head to the casino for some late-night entertainment, and as you walk in the door, the person walking in behind you gets approached by security seemingly out of nowhere.
+They tell him, “Sorry, Mr. Thorp, we’re going to have to ask you to leave the casino. Card counters aren’t welcome here.”&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Machine Learning was present in all of the previously mentioned scenarios. But what is Machine Learning?&lt;/p&gt;
+
+&lt;p&gt;Wikipedia defines &lt;a href=&quot;https://en.wikipedia.org/wiki/Machine_learning&quot;&gt;Machine Learning&lt;/a&gt; as:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Machine learning is the scientific study of algorithms and statistical models that computer systems use to perform a specific task without using explicit instructions, relying on patterns and inference instead. It is seen as a subset of artificial intelligence.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In the definition of Wikipedia, we focus on 2 things:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Machine learning is the scientific study of algorithms and statistical models&lt;/strong&gt; Machine learning uses statistics&lt;/li&gt;
+  &lt;li&gt;Machine learning is seen as a subset of artificial intelligence.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;types-of-machine-learning-algorithms&quot;&gt;Types of Machine Learning Algorithms&lt;/h2&gt;
+&lt;p&gt;Normally, machine learning is sub-categorized to three types as the below:&lt;/p&gt;
+
+&lt;p style=&quot;width: 500px&quot;&gt;&lt;img src=&quot;/assets/images/machine-learning-types.png&quot; alt=&quot;Machine Learning types&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Fig 1. A machine learning road-map. (Image source: &lt;a href=&quot;https://www.slideshare.net/awahid/big-data-and-machine-learning-for-businesses&quot;&gt;Abdul Rahid&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&quot;supervised-learning&quot;&gt;Supervised Learning&lt;/h3&gt;
+&lt;p&gt;Wikipedia defines &lt;a href=&quot;https://en.wikipedia.org/wiki/Supervised_learning&quot;&gt;Supervised Learning&lt;/a&gt; as:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Supervised learning is the machine learning task of learning a function that maps an input to an output based on example input-output pairs. It infers a function from labeled training data consisting of a set of training examples.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;unsupervised-learning&quot;&gt;Unsupervised Learning&lt;/h3&gt;
+
+&lt;h3 id=&quot;semi-supervised-learning&quot;&gt;Semi-supervised Learning&lt;/h3&gt;
+
+&lt;h3 id=&quot;reinforcement-learning&quot;&gt;Reinforcement Learning&lt;/h3&gt;
+
+&lt;h2 id=&quot;summarization&quot;&gt;Summarization&lt;/h2&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;p&gt;[1] &lt;a href=&quot;https://www.manning.com/books/machine-learning-in-action&quot;&gt;Machine Learning in Action - Peter Harrington&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;em&gt;If you notice mistakes and errors in this post, don’t hesitate to contact me at [hoang dot a3 dot lqd at gmail dot com] and I would be super happy to correct them right away!&lt;/em&gt;&lt;/p&gt;</content><author><name>Hoang Pham</name></author><category term="foundation" /><category term="tutorial" /><summary type="html">In recent years, Artificial Intelligence (AI) or more specifically Machine Learning is so pervasive that you probably use it dozens of times a day without knowing it. The self-driving cars of Google and Tesla or Siri - a virtual assistant of Apple are just a few of many AI / Machine Learning applications. In this post, I will show you an overview of machine learning as well as introduce the major types of machine learning algorithms, explain the purpose of each of them, and see what the benefits are.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/introduction-to-machine-learning_social.png" /></entry></feed>
