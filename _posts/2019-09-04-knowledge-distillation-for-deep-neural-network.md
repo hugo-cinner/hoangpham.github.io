@@ -3,6 +3,7 @@ layout: post
 comments: true
 title: "Knowledge Distilation for Deep Neural Network"
 tags: [foundation,tutorial]
+image: knowledge-distillation-with-keras.png
 ---
 
 > Deep Neural Networks (DNN) have recently achieved great success in many natural language processing as well as computer vision tasks. However, they are becoming increasingly deeper, complex, computationally expensive and memory intensive. Some representatives of this trend are the deep language representation models, which includes BERT, ELMo, and GPT. This hinders their deployment in devices with low resources or in applications with strict latency requirements. Therefor, a natural thought is to perform model compression and acceleration in deep networks without significantly decreasing the model performance.

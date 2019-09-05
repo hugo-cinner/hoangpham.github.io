@@ -3,6 +3,7 @@ layout: post
 comments: true
 title: "An Overview of Machine Learning"
 tags: [foundation,tutorial]
+image: introduction-to-machine-learning_social.png
 ---
 
 > In recent years, Artificial Intelligence (AI) or more specifically Machine Learning is so pervasive that you probably use it dozens of times a day without knowing it. The self-driving cars of Google and Tesla or Siri - a virtual assistant of Apple are just a few of many AI / Machine Learning applications. In this post, I will show you an overview of machine learning as well as introduce the major types of machine learning algorithms, explain the purpose of each of them, and see what the benefits are.
